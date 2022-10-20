@@ -1,0 +1,58 @@
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.025);
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.025);
+    }
+    70% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.output {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 1em;
+}
+
+.change {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0.75em;
+    background-color: #1e1e1e;
+    box-shadow: inset 0 0 0.25em #000;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.product {
+    width: 100%;
+    min-height: 4rem;
+    padding: 0.75em;
+    background-color: #1e1e1e;
+    box-shadow: inset 0 0 0.25em #000;
+    border-radius: 3px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.productChoose {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 5px;
+    background-color: #0ff;
+    box-sizing: border-box;
+    -webkit-animation: heartbeat 2s ease 1s infinite normal;
+    animation: heartbeat 2s ease 1s infinite normal;
+}

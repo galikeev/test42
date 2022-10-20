@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     money: "",
-    productChose: "",
+    productChoose: "",
     products: [
         {
             id: 1,
@@ -57,7 +57,7 @@ const vendingSlice = createSlice({
             state.money = payload;
         },
         addProductNumber: (state, { payload }) => {
-            state.productChose = payload;
+            state.productChoose = payload;
         },
     },
 });

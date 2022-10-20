@@ -1,4 +1,4 @@
-import { MoneyForm, ProductForm } from "./components";
+import { MoneyForm, Output, ProductForm } from "./components";
 import styles from "./index.module.scss";
 
 const RightSide = () => {
@@ -6,6 +6,7 @@ const RightSide = () => {
         <section className={styles.right}>
             <MoneyForm />
             <ProductForm />
+            <Output />
         </section>
     );
 };

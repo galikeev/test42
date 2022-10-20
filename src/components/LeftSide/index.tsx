@@ -26,8 +26,6 @@ const ProductItem = ({ name, type, price, id }) => {
 const LeftSide = () => {
     const { products } = useSelector(productsData);
 
-    console.log(products);
-
     return (
         <section className={styles.left}>
             <ul className={styles.wrapper}>

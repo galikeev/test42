@@ -1,23 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addMoney } from "../../../../store/slices/vendingSlice";
 
 const MoneyForm = () => {
     const dispatch = useDispatch();
     const [text, setText] = useState("Insert money");
+    const [money, setMoney] = useState(0);
 
     const banknotes = [50, 100, 200, 500];
 
     const onSubmit = (event: any) => {
         event.preventDefault();
-        const eventMoney = event.target[0].value;
-        if (banknotes.includes(+eventMoney)) {
-            dispatch(addMoney(eventMoney));
-            setText(`Inserted money: ${eventMoney}`);
+        const eventMoney = +event.target[0].value;
+        if (banknotes.includes(eventMoney)) {
+            setMoney((prev) => prev + eventMoney);
         } else {
             setText("Money is not accepted");
+            dispatch(addMoney(""));
         }
     };
+
+    useEffect(() => {
+        if (money > 0) {
+            dispatch(addMoney(money));
+            setText(`Inserted money: ${money}₽`);
+        }
+    }, [money]);
 
     return (
         <form onSubmit={onSubmit}>
