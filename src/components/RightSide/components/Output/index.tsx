@@ -4,18 +4,31 @@ import {
     addMoney,
     addProductNumber,
 } from "../../../../store/slices/vendingSlice";
+
 import styles from "./index.module.scss";
+
+type IDs = {
+    id: number;
+};
+
+type objOptions = {
+    [key: string]: number;
+};
 
 const Output: React.FC = () => {
     const dispatch = useAppDispatch();
     const { productChoose, products, money } = useAppSelector(productsData);
     const coins = [10, 5, 2, 1];
     const back: number[] = [];
-    let objCoins = {};
+    let objCoins: objOptions = {};
 
-    const filteredProduct = products.filter(
-        ({ id }: any) => id === productChoose
+    if (!productChoose) return null;
+
+    const [touchProduct] = products.filter(
+        ({ id }: IDs) => id === productChoose
     );
+
+    const { id, name, type, price } = touchProduct;
 
     const onAcceptProduct = () => {
         dispatch(addMoney(0));
@@ -30,15 +43,15 @@ const Output: React.FC = () => {
         if (change) {
             getChange(change);
         }
-        return (objCoins = back.reduce((acc, el) => {
+        return (objCoins = back.reduce<Record<string, number>>((acc, el) => {
             acc[el] = (acc[el] || 0) + 1;
             return acc;
         }, {}));
     };
 
-    getChange(200, 75);
+    getChange(money, price);
 
-    if (!productChoose) return null;
+    console.log(objCoins);
 
     return (
         <div className={styles.output}>
@@ -47,19 +60,15 @@ const Output: React.FC = () => {
                 <span></span>
             </div>
             <div className={styles.product}>
-                {filteredProduct.map(({ name, type, price, id }: any) => {
-                    return (
-                        <div
-                            key={id}
-                            className={styles.productChoose}
-                            onClick={onAcceptProduct}
-                        >
-                            <h3>{name}</h3>
-                            <p>{type}</p>
-                            <span>{price}</span>
-                        </div>
-                    );
-                })}
+                <div
+                    key={id}
+                    className={styles.productChoose}
+                    onClick={onAcceptProduct}
+                >
+                    <h3>{name}</h3>
+                    <p>{type}</p>
+                    <span>{price}</span>
+                </div>
             </div>
         </div>
     );

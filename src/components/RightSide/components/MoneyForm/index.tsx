@@ -33,6 +33,7 @@ const MoneyForm: React.FC = () => {
     useEffect(() => {
         if (moneyState === 0) {
             setText("Insert Money");
+            setMoney(0);
             ref.current.value = "";
         }
     }, [moneyState]);

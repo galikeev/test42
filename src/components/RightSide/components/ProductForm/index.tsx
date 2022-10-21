@@ -55,6 +55,7 @@ const ProductForm: React.FC = () => {
     useEffect(() => {
         if (productChoose === 0) {
             setText("/");
+            setProduct(0);
         }
     }, [productChoose]);
 
