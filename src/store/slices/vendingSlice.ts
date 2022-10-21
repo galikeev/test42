@@ -8,14 +8,14 @@ type Product = {
 };
 
 type ProductState = {
-    money: number | string;
-    productChoose: number | string;
+    money: number;
+    productChoose: number;
     products: Product[];
 };
 
 const initialState: ProductState = {
-    money: "",
-    productChoose: "",
+    money: 0,
+    productChoose: 0,
     products: [
         {
             id: 1,
@@ -66,7 +66,7 @@ const vendingSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
-        addMoney: (state, action: PayloadAction<number | string>) => {
+        addMoney: (state, action: PayloadAction<number>) => {
             state.money = action.payload;
         },
         addProductNumber: (state, action: PayloadAction<number>) => {

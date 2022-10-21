@@ -16,7 +16,7 @@ const MoneyForm: React.FC = () => {
             setMoney((prev) => prev + eventMoney);
         } else {
             setText("Money is not accepted");
-            dispatch(addMoney(""));
+            dispatch(addMoney(0));
         }
     };
 
