@@ -8,6 +8,8 @@ interface ProductItemProps {
     price: number;
 }
 
+const numbers: number[] = [1, 2, 3, 4, 5, 6, 7];
+
 const ProductForm: React.FC = () => {
     const dispatch = useAppDispatch();
     const ref = useRef<any>();
@@ -16,8 +18,6 @@ const ProductForm: React.FC = () => {
     const [product, setProduct] = useState<number>(0);
     const [text, setText] = useState<string>("/");
     const [disabledInput, setDisabledInput] = useState<boolean>(!money);
-
-    const numbers: number[] = [1, 2, 3, 4, 5, 6, 7];
 
     const isEnoughMoney = products.some(
         ({ price, id }: ProductItemProps) => price <= money && id === product

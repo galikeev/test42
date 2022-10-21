@@ -3,14 +3,14 @@ import { useAppDispatch, useAppSelector } from "../../../../hook";
 import { addMoney } from "../../../../store/slices/vendingSlice";
 import { productsData } from "../../../../store/selectors/vendingSelector";
 
+const banknotes: number[] = [50, 100, 200, 500];
+
 const MoneyForm: React.FC = () => {
     const dispatch = useAppDispatch();
     const { money: moneyState } = useAppSelector(productsData);
     const ref = useRef<any>();
     const [text, setText] = useState<string>("Insert money");
     const [money, setMoney] = useState<number>(0);
-
-    const banknotes: number[] = [50, 100, 200, 500];
 
     const onSubmit = (event: any) => {
         event.preventDefault();

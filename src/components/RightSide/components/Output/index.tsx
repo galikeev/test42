@@ -15,10 +15,11 @@ type objOptions = {
     [key: string]: number;
 };
 
+const coins: number[] = [10, 5, 2, 1];
+
 const Output: React.FC = () => {
     const dispatch = useAppDispatch();
     const { productChoose, products, money } = useAppSelector(productsData);
-    const coins = [10, 5, 2, 1];
     const back: number[] = [];
     let objCoins: objOptions = {};
 
