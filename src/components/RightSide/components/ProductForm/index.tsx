@@ -1,12 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../../hook";
 import { productsData } from "../../../../store/selectors/vendingSelector";
 import { addProductNumber } from "../../../../store/slices/vendingSlice";
 
+interface ProductItemProps {
+    id: number;
+    price: number;
+}
+
 const ProductForm: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const ref = useRef<any>();
-    const { money, products } = useSelector(productsData);
+    const { money, products, productChoose } = useAppSelector(productsData);
 
     const [product, setProduct] = useState<number>(0);
     const [text, setText] = useState<string>("/");
@@ -15,7 +20,7 @@ const ProductForm: React.FC = () => {
     const numbers: number[] = [1, 2, 3, 4, 5, 6, 7];
 
     const isEnoughMoney = products.some(
-        ({ price, id }: any) => price <= money && id === product
+        ({ price, id }: ProductItemProps) => price <= money && id === product
     );
 
     const onSubmit = (event: any) => {
@@ -45,7 +50,13 @@ const ProductForm: React.FC = () => {
         if (product > 0 && !isEnoughMoney) {
             setText("No enough money");
         }
-    }, [product, isEnoughMoney]);
+    }, [product, isEnoughMoney, dispatch]);
+
+    useEffect(() => {
+        if (productChoose === 0) {
+            setText("/");
+        }
+    }, [productChoose]);
 
     return (
         <form onSubmit={onSubmit}>

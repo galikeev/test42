@@ -1,18 +1,13 @@
-import { useSelector } from "react-redux";
 import classNames from "classnames";
+import React from "react";
+import { useAppSelector } from "../../../../hook";
 import { productsData } from "../../../../store/selectors/vendingSelector";
+import { Product } from "../../../../types/type";
 
 import styles from "./index.module.scss";
 
-interface ProductItemProps {
-    id: number;
-    name: string;
-    type: string;
-    price: number;
-}
-
-const ProductItem: React.FC<ProductItemProps> = ({ name, type, price, id }) => {
-    const { money } = useSelector(productsData);
+const ProductItem: React.FC<Product> = ({ name, type, price, id }) => {
+    const { money } = useAppSelector(productsData);
 
     return (
         <li
@@ -30,4 +25,4 @@ const ProductItem: React.FC<ProductItemProps> = ({ name, type, price, id }) => {
     );
 };
 
-export default ProductItem;
+export default React.memo(ProductItem);

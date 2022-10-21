@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../../hook";
 import { productsData } from "../../../../store/selectors/vendingSelector";
 import {
     addMoney,
@@ -7,8 +7,8 @@ import {
 import styles from "./index.module.scss";
 
 const Output: React.FC = () => {
-    const dispatch = useDispatch();
-    const { productChoose, products, money } = useSelector(productsData);
+    const dispatch = useAppDispatch();
+    const { productChoose, products, money } = useAppSelector(productsData);
     const coins = [10, 5, 2, 1];
     const back: number[] = [];
     let objCoins = {};

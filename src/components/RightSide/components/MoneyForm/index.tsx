@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useRef, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../../hook";
 import { addMoney } from "../../../../store/slices/vendingSlice";
+import { productsData } from "../../../../store/selectors/vendingSelector";
 
 const MoneyForm: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
+    const { money: moneyState } = useAppSelector(productsData);
+    const ref = useRef<any>();
     const [text, setText] = useState<string>("Insert money");
     const [money, setMoney] = useState<number>(0);
 
@@ -25,12 +28,19 @@ const MoneyForm: React.FC = () => {
             dispatch(addMoney(money));
             setText(`Inserted money: ${money}₽`);
         }
-    }, [money]);
+    }, [money, dispatch]);
+
+    useEffect(() => {
+        if (moneyState === 0) {
+            setText("Insert Money");
+            ref.current.value = "";
+        }
+    }, [moneyState]);
 
     return (
         <form onSubmit={onSubmit}>
             <label htmlFor="">{text}</label>
-            <input type="text" name="money" placeholder="..." />
+            <input ref={ref} type="text" name="money" placeholder="..." />
             <p>
                 Available banknotes: 50, 100, 200 or 500 ₽. The machine gives
                 change in 1, 2, 5 and 10 ₽ coins.

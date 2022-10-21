@@ -1,16 +1,18 @@
-import { useSelector } from "react-redux";
+import React from "react";
+import { useAppSelector } from "../../hook";
 import { productsData } from "../../store/selectors/vendingSelector";
+import { Product } from "../../types/type";
 import { ProductItem } from "./components";
 
 import styles from "./index.module.scss";
 
 const LeftSide: React.FC = () => {
-    const { products } = useSelector(productsData);
+    const { products } = useAppSelector(productsData);
 
     return (
         <section className={styles.left}>
             <ul className={styles.wrapper}>
-                {products.map(({ name, type, price, id }: any) => {
+                {products.map(({ name, type, price, id }: Product) => {
                     return (
                         <ProductItem
                             key={id}
@@ -26,4 +28,4 @@ const LeftSide: React.FC = () => {
     );
 };
 
-export default LeftSide;
+export default React.memo(LeftSide);

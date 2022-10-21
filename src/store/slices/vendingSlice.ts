@@ -1,17 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Product } from "../../types/type";
 
-type Product = {
-    id: number;
-    name: string;
-    type: string;
-    price: number;
-};
-
-type ProductState = {
+interface ProductState {
     money: number;
     productChoose: number;
     products: Product[];
-};
+}
 
 const initialState: ProductState = {
     money: 0,

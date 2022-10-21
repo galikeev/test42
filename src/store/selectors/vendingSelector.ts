@@ -1,1 +1,3 @@
-export const productsData = (state: any) => state.products;
+import { RootState } from "..";
+
+export const productsData = (state: RootState) => state.products;
