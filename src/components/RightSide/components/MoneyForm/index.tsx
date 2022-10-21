@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addMoney } from "../../../../store/slices/vendingSlice";
 
-const MoneyForm = () => {
+const MoneyForm: React.FC = () => {
     const dispatch = useDispatch();
-    const [text, setText] = useState("Insert money");
-    const [money, setMoney] = useState(0);
+    const [text, setText] = useState<string>("Insert money");
+    const [money, setMoney] = useState<number>(0);
 
-    const banknotes = [50, 100, 200, 500];
+    const banknotes: number[] = [50, 100, 200, 500];
 
     const onSubmit = (event: any) => {
         event.preventDefault();

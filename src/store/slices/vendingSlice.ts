@@ -1,6 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
+type Product = {
+    id: number;
+    name: string;
+    type: string;
+    price: number;
+};
+
+type ProductState = {
+    money: number | string;
+    productChoose: number | string;
+    products: Product[];
+};
+
+const initialState: ProductState = {
     money: "",
     productChoose: "",
     products: [
@@ -53,11 +66,11 @@ const vendingSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
-        addMoney: (state, { payload }) => {
-            state.money = payload;
+        addMoney: (state, action: PayloadAction<number | string>) => {
+            state.money = action.payload;
         },
-        addProductNumber: (state, { payload }) => {
-            state.productChoose = payload;
+        addProductNumber: (state, action: PayloadAction<number>) => {
+            state.productChoose = action.payload;
         },
     },
 });

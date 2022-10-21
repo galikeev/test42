@@ -3,19 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { productsData } from "../../../../store/selectors/vendingSelector";
 import { addProductNumber } from "../../../../store/slices/vendingSlice";
 
-const ProductForm = () => {
+const ProductForm: React.FC = () => {
     const dispatch = useDispatch();
     const ref = useRef<any>();
     const { money, products } = useSelector(productsData);
 
-    const [product, setProduct] = useState(0);
-    const [text, setText] = useState("/");
-    const [disabledInput, setDisabledInput] = useState(!money);
+    const [product, setProduct] = useState<number>(0);
+    const [text, setText] = useState<string>("/");
+    const [disabledInput, setDisabledInput] = useState<boolean>(!money);
 
-    const numbers = [1, 2, 3, 4, 5, 6, 7];
+    const numbers: number[] = [1, 2, 3, 4, 5, 6, 7];
 
     const isEnoughMoney = products.some(
-        ({ price, id }) => price <= money && id === product
+        ({ price, id }: any) => price <= money && id === product
     );
 
     const onSubmit = (event: any) => {

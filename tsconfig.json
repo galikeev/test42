@@ -17,5 +17,8 @@
         "jsx": "react-jsx",
         "plugins": [{ "name": "typescript-plugin-css-modules" }]
     },
-    "include": ["src"]
+    "include": ["src"],
+    "parserOptions": {
+        "project": ["path/to/your/tsconfig/file"]
+    }
 }
