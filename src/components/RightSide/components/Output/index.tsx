@@ -51,14 +51,17 @@ const Output: React.FC = () => {
 
     getChange(money, price);
 
-    console.log(objCoins);
+    const changeProduct = Object.entries(objCoins).map(([key, value]) => {
+        return (
+            <span>
+                {key}₽: {value} coins
+            </span>
+        );
+    });
 
     return (
         <div className={styles.output}>
-            <div className={styles.change}>
-                <span></span>
-                <span></span>
-            </div>
+            <div className={styles.change}>{changeProduct}</div>
             <div className={styles.product}>
                 <div
                     key={id}
