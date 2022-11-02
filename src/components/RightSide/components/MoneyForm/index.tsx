@@ -9,7 +9,7 @@ const banknotes: number[] = [50, 100, 200, 500];
 const MoneyForm: React.FC = () => {
     const dispatch = useAppDispatch();
     const { money: moneyState } = useAppSelector(productsData);
-    const ref = useRef<any>();
+    const ref = useRef<HTMLFormElement>(null);
     const [text, setText] = useState<string>("Insert money");
     const [money, setMoney] = useState<number>(0);
 
@@ -37,14 +37,14 @@ const MoneyForm: React.FC = () => {
         if (moneyState === 0) {
             setText("Insert Money");
             setMoney(0);
-            ref.current.value = "";
+            ref.current?.reset();
         }
     }, [moneyState]);
 
     return (
-        <form onSubmit={onSubmit}>
+        <form ref={ref} onSubmit={onSubmit}>
             <label htmlFor="">{text}</label>
-            <input ref={ref} type="text" name="money" placeholder="..." />
+            <input type="text" name="money" placeholder="..." />
             <p>
                 Available banknotes: 50, 100, 200 or 500 ₽. The machine gives
                 change in 1, 2, 5 and 10 ₽ coins.
