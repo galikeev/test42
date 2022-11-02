@@ -13,7 +13,7 @@ const numbers: number[] = [1, 2, 3, 4, 5, 6, 7];
 
 const ProductForm: React.FC = () => {
     const dispatch = useAppDispatch();
-    const ref = useRef<any>();
+    const ref = useRef<HTMLFormElement>(null);
     const { money, products, productChoose } = useAppSelector(productsData);
 
     const [product, setProduct] = useState<number>(0);
@@ -47,7 +47,8 @@ const ProductForm: React.FC = () => {
         if (product > 0 && isEnoughMoney) {
             dispatch(addProductNumber(product));
             setText("Success");
-            ref.current.value = "";
+            console.log(ref);
+            ref.current?.reset();
             setDisabledInput(true);
         }
         if (product > 0 && !isEnoughMoney) {
@@ -63,10 +64,9 @@ const ProductForm: React.FC = () => {
     }, [productChoose]);
 
     return (
-        <form onSubmit={onSubmit}>
+        <form ref={ref} onSubmit={onSubmit}>
             <label htmlFor="">{text}</label>
             <input
-                ref={ref}
                 type="text"
                 name="product"
                 placeholder="..."
