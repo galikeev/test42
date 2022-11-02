@@ -33,6 +33,7 @@ const ProductForm: React.FC = () => {
             setProduct(eventProduct);
         } else {
             setText("Enter corected number");
+            ref.current?.reset();
         }
     };
 
