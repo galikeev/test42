@@ -12,6 +12,7 @@ const MoneyForm: React.FC = () => {
     const ref = useRef<HTMLFormElement>(null);
     const [text, setText] = useState<string>("Insert money");
     const [money, setMoney] = useState<number>(0);
+    const [disabled, setDisabled] = useState<boolean>(false);
 
     const onSubmit: React.FormEventHandler<HTMLFormElement & FormFields> = (
         event
@@ -30,6 +31,7 @@ const MoneyForm: React.FC = () => {
         if (money > 0) {
             dispatch(addMoney(money));
             setText(`Inserted money: ${money}₽`);
+            setDisabled(true);
         }
     }, [money, dispatch]);
 
@@ -37,6 +39,7 @@ const MoneyForm: React.FC = () => {
         if (moneyState === 0) {
             setText("Insert Money");
             setMoney(0);
+            setDisabled(false);
             ref.current?.reset();
         }
     }, [moneyState]);
@@ -44,7 +47,12 @@ const MoneyForm: React.FC = () => {
     return (
         <form ref={ref} onSubmit={onSubmit}>
             <label htmlFor="">{text}</label>
-            <input type="text" name="money" placeholder="..." />
+            <input
+                type="text"
+                name="money"
+                placeholder="..."
+                disabled={disabled}
+            />
             <p>
                 Available banknotes: 50, 100, 200 or 500 ₽. The machine gives
                 change in 1, 2, 5 and 10 ₽ coins.
