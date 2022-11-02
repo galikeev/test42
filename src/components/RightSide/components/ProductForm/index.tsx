@@ -47,12 +47,12 @@ const ProductForm: React.FC = () => {
         if (product > 0 && isEnoughMoney) {
             dispatch(addProductNumber(product));
             setText("Success");
-            console.log(ref);
             ref.current?.reset();
             setDisabledInput(true);
         }
         if (product > 0 && !isEnoughMoney) {
             setText("No enough money");
+            ref.current?.reset();
         }
     }, [product, isEnoughMoney, dispatch]);
 
