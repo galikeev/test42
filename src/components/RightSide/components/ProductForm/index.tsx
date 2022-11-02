@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../hook";
 import { productsData } from "../../../../store/selectors/vendingSelector";
 import { addProductNumber } from "../../../../store/slices/vendingSlice";
+import { FormFields } from "../../../../types/type";
 
 interface ProductItemProps {
     id: number;
@@ -23,9 +24,11 @@ const ProductForm: React.FC = () => {
         ({ price, id }: ProductItemProps) => price <= money && id === product
     );
 
-    const onSubmit = (event: any) => {
+    const onSubmit: React.FormEventHandler<HTMLFormElement & FormFields> = (
+        event
+    ) => {
         event.preventDefault();
-        const eventProduct = +event.target[0].value;
+        const eventProduct = +event.currentTarget.product.value;
         if (numbers.includes(eventProduct)) {
             setProduct(eventProduct);
         } else {

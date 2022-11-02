@@ -4,3 +4,8 @@ export type Product = {
     type: string;
     price: number;
 };
+
+export type FormFields = {
+    product: HTMLInputElement;
+    money: HTMLInputElement;
+};
