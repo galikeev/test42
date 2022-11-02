@@ -8,7 +8,7 @@ const banknotes: number[] = [50, 100, 200, 500];
 
 const MoneyForm: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { money: moneyState } = useAppSelector(productsData);
+    const { money: moneyState, productChoose } = useAppSelector(productsData);
     const ref = useRef<HTMLFormElement>(null);
     const [text, setText] = useState<string>("Insert money");
     const [money, setMoney] = useState<number>(0);
@@ -31,7 +31,6 @@ const MoneyForm: React.FC = () => {
         if (money > 0) {
             dispatch(addMoney(money));
             setText(`Inserted money: ${money}₽`);
-            setDisabled(true);
         }
     }, [money, dispatch]);
 
@@ -43,6 +42,12 @@ const MoneyForm: React.FC = () => {
             ref.current?.reset();
         }
     }, [moneyState]);
+
+    useEffect(() => {
+        if (productChoose !== 0) {
+            setDisabled(true);
+        }
+    }, [productChoose]);
 
     return (
         <form ref={ref} onSubmit={onSubmit}>
