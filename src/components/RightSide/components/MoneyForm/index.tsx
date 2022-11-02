@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../hook";
 import { addMoney } from "../../../../store/slices/vendingSlice";
 import { productsData } from "../../../../store/selectors/vendingSelector";
+import { FormFields } from "../../../../types/type";
 
 const banknotes: number[] = [50, 100, 200, 500];
 
@@ -12,9 +13,11 @@ const MoneyForm: React.FC = () => {
     const [text, setText] = useState<string>("Insert money");
     const [money, setMoney] = useState<number>(0);
 
-    const onSubmit = (event: any) => {
+    const onSubmit: React.FormEventHandler<HTMLFormElement & FormFields> = (
+        event
+    ) => {
         event.preventDefault();
-        const eventMoney = +event.target[0].value;
+        const eventMoney = +event.currentTarget.money.value;
         if (banknotes.includes(eventMoney)) {
             setMoney((prev) => prev + eventMoney);
         } else {
